@@ -1,0 +1,36 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: api-gateway
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/trading-app
+
+  cloud:
+    gateway:
+      routes:
+        - id: market-data-route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/market/**
+          filters:
+            - StripPrefix=1
+
+        - id: portfolio-route
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/portfolio/**
+          filters:
+            - StripPrefix=1
+
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
