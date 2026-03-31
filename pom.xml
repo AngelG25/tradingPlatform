@@ -14,6 +14,7 @@
     <module>api-gateway</module>
     <module>market-data</module>
     <module>portfolio</module>
+    <module>user-manager</module>
   </modules>
 
   <properties>
