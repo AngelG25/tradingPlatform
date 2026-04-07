@@ -1,4 +1,6 @@
-package domain.model;
+package com.tradingplatform.domain;
+
+import com.tradingplatform.domain.exceptions.InvalidEmailException;
 
 import java.util.regex.Pattern;
 
@@ -10,7 +12,7 @@ public record Email(String value) {
 
     public Email {
             if (value == null || !EMAIL_PATTERN.matcher(value).matches()) {
-                throw new IllegalArgumentException("Invalid email address: " + value);
+                throw new InvalidEmailException("Invalid email address: " + value);
             }
     }
 

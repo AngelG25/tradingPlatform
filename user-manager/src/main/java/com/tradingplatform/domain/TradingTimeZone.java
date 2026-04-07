@@ -1,4 +1,4 @@
-package domain.model;
+package com.tradingplatform.domain;
 
 public enum TradingTimeZone {
     ASIA,

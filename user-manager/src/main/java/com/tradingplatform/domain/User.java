@@ -1,4 +1,4 @@
-package domain.model;
+package com.tradingplatform.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -35,18 +35,13 @@ public class User {
     }
 
     // Factory method — preferred way to create a User from the domain perspective
-    public User create(final String name,
-                       final Password password,
-                       final Email email,
-                       final Phone phone,
-                       final List<TradingTimeZone> tradingTimeZones) {
+    public static User create(final String name,
+                              final Password password,
+                              final Email email) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Name cannot be null or blank");
         }
-        if (tradingTimeZones == null || tradingTimeZones.isEmpty()) {
-            throw new IllegalArgumentException("At least one trading time zone is required");
-        }
-        return new User(UserID.of(UUID.randomUUID()), name, password, email, phone, tradingTimeZones);
+        return new User(UserID.of(UUID.randomUUID()), name, password, email, null, List.of());
     }
 
     public static User reconstitute(final UserID id,

@@ -1,6 +1,6 @@
-package domain.model;
+package com.tradingplatform.domain;
 
-import domain.model.exceptions.InvalidPasswordException;
+import com.tradingplatform.domain.exceptions.InvalidPasswordException;
 
 public record Password(String value) {
 

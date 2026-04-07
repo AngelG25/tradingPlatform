@@ -1,4 +1,4 @@
-package domain.model;
+package com.tradingplatform.domain;
 
 import java.util.UUID;
 

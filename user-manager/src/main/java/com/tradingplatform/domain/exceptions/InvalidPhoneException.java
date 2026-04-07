@@ -1,4 +1,4 @@
-package domain.model.exceptions;
+package com.tradingplatform.domain.exceptions;
 
 public class InvalidPhoneException extends RuntimeException {
 

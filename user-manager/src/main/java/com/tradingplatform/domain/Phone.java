@@ -1,6 +1,6 @@
-package domain.model;
+package com.tradingplatform.domain;
 
-import domain.model.exceptions.InvalidPhoneException;
+import com.tradingplatform.domain.exceptions.InvalidPhoneException;
 
 import java.util.regex.Pattern;
 
