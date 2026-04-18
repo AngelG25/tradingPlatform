@@ -35,12 +35,11 @@ public class KeycloakAdapter implements KeycloakPort {
     private String clientSecret;
 
     @Override
-    public Mono<Void> createUser(User user) {
+    public Mono<String> createUser(User user) {
         return obtainAdminToken()
                 .flatMap(token -> registerUserInKeycloak(user, token))
                 .doOnSuccess(v -> log.info("User created in Keycloak: {}", user.getEmail()))
-                .doOnError(e -> log.error("Error creating user in Keycloak", e))
-                .then();
+                .doOnError(e -> log.error("Error creating user in Keycloak", e));
     }
 
     private Mono<String> obtainAdminToken() {
@@ -66,6 +65,7 @@ public class KeycloakAdapter implements KeycloakPort {
                 "username", user.getName(),
                 "email", user.getEmail().value(),
                 "enabled", true,
+                "emailVerified", true,  // Dejarlo solo en desarrollo, despues añadir correo
                 "credentials", List.of(credential)
         );
 

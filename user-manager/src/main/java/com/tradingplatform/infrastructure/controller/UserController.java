@@ -16,7 +16,7 @@ public class UserController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Void> register(@RequestBody RegisterRequest request) {
+    public Mono<String> register(@RequestBody RegisterRequest request) {
         return registerUserUseCase.execute(request);
     }
 }

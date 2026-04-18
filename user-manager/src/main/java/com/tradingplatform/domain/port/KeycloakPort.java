@@ -4,5 +4,5 @@ import com.tradingplatform.domain.User;
 import reactor.core.publisher.Mono;
 
 public interface KeycloakPort {
-    Mono<Void> createUser(User user);
+    Mono<String> createUser(User user);
 }

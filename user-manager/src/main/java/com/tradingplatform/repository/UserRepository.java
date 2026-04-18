@@ -2,19 +2,19 @@ package com.tradingplatform.repository;
 
 import com.tradingplatform.domain.User;
 import com.tradingplatform.domain.UserID;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserRepository {
 
-    User save(User user);
+    Mono<User> save(User user);
 
-    Optional<User> findById(UserID id);
+    Mono<User> findById(UserID id);
 
-    List<User> findAll();
+    Mono<List<User>> findAll();
 
-    boolean existsById(UserID id);
+    Mono<Boolean> existsById(UserID id);
 
-    void deleteById(UserID id);
+    Mono<Void> deleteById(UserID id);
 }
