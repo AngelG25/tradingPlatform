@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e7a55ce1-dd26-4e04-bbaf-a87efd342a1c" name="Changes" comment="add user management and optimize creation">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/tradingplatform/ApiGatewayApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/tradingplatform/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/tradingplatform/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/market-data/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/UserManagerApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/application/RegisterUserUseCase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/domain/Email.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/domain/Password.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/domain/Phone.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/domain/TradingTimeZone.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/domain/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/domain/UserID.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/domain/exceptions/InvalidEmailException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/domain/exceptions/InvalidPasswordException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/domain/exceptions/InvalidPhoneException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/domain/port/KeycloakPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/infrastructure/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/infrastructure/dtos/RegisterRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/infrastructure/keycloak/KeycloakAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/infrastructure/keycloak/WebClientConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/infrastructure/r2dbc/UserEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/infrastructure/r2dbc/UserR2dbcRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/infrastructure/repository/PostgresUserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-manager/src/main/resources/db/migration/V1__create_users_table.sql" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+        <option value="Record" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AngelG25&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AngelG25/tradingPlatform.git&quot;,
+    &quot;accountId&quot;: &quot;a354f1f7-d883-4c9b-afc3-c1692c63b0e2&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/6.1.13/spring-web-6.1.13-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="customMavenHome" value="C:\Program Files\apache-maven-3.9.9" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="3BP6E3RiblOg6ZofOqzrcqi0g59" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.docker-compose.yml.postgres-user-manager: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.UserManagerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/dev/Java/tradingApp/tradingPlatform&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\Java\tradingApp\tradingPlatform" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\dev\Java\tradingApp\tradingPlatform\api-gateway\src\main\resources" />
+      <recent name="D:\dev\Java\tradingApp\tradingPlatform\api-gateway\src\main\java" />
+      <recent name="D:\dev\Java\tradingApp\tradingPlatform\api-gateway\src\resources" />
+      <recent name="D:\dev\Java\tradingApp\tradingPlatform\api-gateway\src\main" />
+      <recent name="D:\dev\Java\tradingApp\tradingPlatform\api-gateway\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.UserManagerApplication">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="tradingPlatform" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="tradingPlatform" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+      <module name="api-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tradingplatform.ApiGatewayApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tradingplatform.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserManagerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+      <module name="user-manager" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tradingplatform.UserManagerApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tradingplatform.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.postgres-user-manager: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="postgres-user-manager" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.UserManagerApplication" />
+        <item itemvalue="Docker.docker-compose.yml.postgres-user-manager: Compose Deployment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.25134.95" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e7a55ce1-dd26-4e04-bbaf-a87efd342a1c" name="Changes" comment="" />
+      <created>1774378248335</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774378248335</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1774378967166</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1774378967166</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add api gateway configuration">
+      <option name="closed" value="true" />
+      <created>1774877615747</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1774877615747</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add user manager module to manage user creation">
+      <option name="closed" value="true" />
+      <created>1774969588635</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1774969588636</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add user registration from new module user-manager">
+      <option name="closed" value="true" />
+      <created>1775584454622</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1775584454623</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add user management and optimize creation">
+      <option name="closed" value="true" />
+      <created>1776525246155</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1776525246155</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="add api gateway configuration" />
+    <MESSAGE value="add user manager module to manage user creation" />
+    <MESSAGE value="add user registration from new module user-manager" />
+    <MESSAGE value="add user management and optimize creation" />
+    <option name="LAST_COMMIT_MESSAGE" value="add user management and optimize creation" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/infrastructure/keycloak/KeycloakAdapter.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/user-manager/src/main/java/com/tradingplatform/infrastructure/keycloak/KeycloakAdapter.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn compile:*)",
+      "Bash(curl -s \"https://repo1.maven.org/maven2/io/r2dbc/r2dbc-postgresql/maven-metadata.xml\")",
+      "WebSearch"
+    ]
+  }
+}
