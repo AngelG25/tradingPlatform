@@ -1,4 +1,0 @@
-TODO:
- 1. Quitar reactividad con Mono, Flux, no es necesaria en Java 25
- 2. Introducir la base de datos interna de user-manager, ahora mismo no se usa
- 3. Optimizar jdbc ,r2dbc... usar una sola
