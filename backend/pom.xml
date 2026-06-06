@@ -14,15 +14,14 @@
   <modules>
     <module>api-gateway</module>
     <module>market-data</module>
-    <module>portfolio</module>
     <module>user-manager</module>
   </modules>
 
   <properties>
     <java.version>25</java.version>
 
-    <spring-boot.version>3.4.0</spring-boot.version>
-    <spring-cloud.version>2024.0.0</spring-cloud.version>
+    <spring-boot.version>4.0.6</spring-boot.version>
+    <spring-cloud.version>2025.1.0</spring-cloud.version>
 
     <mapstruct.version>1.6.3</mapstruct.version>
     <lombok.version>1.18.42</lombok.version>
@@ -61,6 +60,9 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>${spring-boot.version}</version>
+          <configuration>
+            <jvmArguments>-Dspring.classformat.ignore=true</jvmArguments>
+          </configuration>
         </plugin>
 
         <plugin>

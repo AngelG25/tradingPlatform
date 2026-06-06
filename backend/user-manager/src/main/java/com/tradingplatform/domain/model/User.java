@@ -1,4 +1,4 @@
-package com.tradingplatform.domain;
+package com.tradingplatform.domain.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

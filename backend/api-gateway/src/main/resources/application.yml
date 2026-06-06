@@ -21,13 +21,6 @@ spring:
           filters:
             - StripPrefix=1
 
-        - id: portfolio-route
-          uri: http://localhost:8082
-          predicates:
-            - Path=/api/portfolio/**
-          filters:
-            - StripPrefix=1
-
       globalcors:
         cors-configurations:
           '[/**]':

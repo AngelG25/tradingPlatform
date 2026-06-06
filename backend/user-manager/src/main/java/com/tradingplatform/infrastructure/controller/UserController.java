@@ -1,7 +1,7 @@
 package com.tradingplatform.infrastructure.controller;
 
-import com.tradingplatform.application.RegisterUserUseCase;
-import com.tradingplatform.infrastructure.dtos.RegisterRequest;
+import com.tradingplatform.application.usecase.RegisterUserUseCase;
+import com.tradingplatform.application.dto.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

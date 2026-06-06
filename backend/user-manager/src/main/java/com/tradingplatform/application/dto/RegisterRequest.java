@@ -1,4 +1,4 @@
-package com.tradingplatform.infrastructure.dtos;
+package com.tradingplatform.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

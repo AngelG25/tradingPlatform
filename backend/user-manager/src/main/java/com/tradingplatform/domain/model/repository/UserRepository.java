@@ -1,12 +1,14 @@
-package com.tradingplatform.repository;
+package com.tradingplatform.domain.model.repository;
 
-import com.tradingplatform.domain.User;
-import com.tradingplatform.domain.UserID;
+import com.tradingplatform.domain.model.User;
+import com.tradingplatform.domain.model.UserID;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 public interface UserRepository {
+
+    Mono<String> createUser(User user);
 
     Mono<User> save(User user);
 

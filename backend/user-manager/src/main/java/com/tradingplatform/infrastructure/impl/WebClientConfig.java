@@ -1,4 +1,4 @@
-package com.tradingplatform.infrastructure.keycloak;
+package com.tradingplatform.infrastructure.impl;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

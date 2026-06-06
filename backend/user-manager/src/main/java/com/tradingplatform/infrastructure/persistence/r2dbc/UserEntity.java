@@ -1,4 +1,4 @@
-package com.tradingplatform.infrastructure.r2dbc;
+package com.tradingplatform.infrastructure.persistence.r2dbc;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

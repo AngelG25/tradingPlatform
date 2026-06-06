@@ -1,7 +1,6 @@
-package com.tradingplatform.infrastructure.keycloak;
+package com.tradingplatform.infrastructure.impl;
 
-import com.tradingplatform.domain.User;
-import com.tradingplatform.domain.port.KeycloakPort;
+import com.tradingplatform.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +17,7 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class KeycloakAdapter implements KeycloakPort {
+public class KeycloakAdapter {
 
     private final WebClient webClient;
 
@@ -34,7 +33,6 @@ public class KeycloakAdapter implements KeycloakPort {
     @Value("${keycloak.admin.client-secret}")
     private String clientSecret;
 
-    @Override
     public Mono<String> createUser(User user) {
         return obtainAdminToken()
                 .flatMap(token -> registerUserInKeycloak(user, token))

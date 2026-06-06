@@ -1,4 +1,4 @@
-package com.tradingplatform.domain;
+package com.tradingplatform.domain.model;
 
 import com.tradingplatform.domain.exceptions.InvalidEmailException;
 

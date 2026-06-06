@@ -1,12 +1,12 @@
-package com.tradingplatform.infrastructure.repository;
+package com.tradingplatform.infrastructure.impl;
 
-import com.tradingplatform.domain.Email;
-import com.tradingplatform.domain.User;
-import com.tradingplatform.domain.UserID;
-import com.tradingplatform.domain.Password;
-import com.tradingplatform.infrastructure.r2dbc.UserEntity;
-import com.tradingplatform.infrastructure.r2dbc.UserR2dbcRepository;
-import com.tradingplatform.repository.UserRepository;
+import com.tradingplatform.domain.model.Email;
+import com.tradingplatform.domain.model.User;
+import com.tradingplatform.domain.model.UserID;
+import com.tradingplatform.domain.model.Password;
+import com.tradingplatform.infrastructure.persistence.r2dbc.UserEntity;
+import com.tradingplatform.infrastructure.persistence.r2dbc.UserR2dbcRepository;
+import com.tradingplatform.domain.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
@@ -15,9 +15,15 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class PostgresUserRepository implements UserRepository {
+public class UserImpl implements UserRepository {
 
     private final UserR2dbcRepository r2dbcRepository;
+    private final KeycloakAdapter keycloakAdapter;
+
+    @Override
+    public Mono<String> createUser(User user) {
+        return keycloakAdapter.createUser(user);
+    }
 
     @Override
     public Mono<User> save(User user) {
