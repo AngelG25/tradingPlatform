@@ -5,7 +5,6 @@ import com.tradingplatform.application.dto.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/users")
@@ -16,7 +15,7 @@ public class UserController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<String> register(@RequestBody RegisterRequest request) {
+    public String register(@RequestBody RegisterRequest request) {
         return registerUserUseCase.execute(request);
     }
 }

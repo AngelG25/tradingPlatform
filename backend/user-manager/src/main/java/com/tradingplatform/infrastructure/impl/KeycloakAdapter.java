@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+import org.springframework.web.client.RestClient;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +19,7 @@ import java.util.Map;
 @Slf4j
 public class KeycloakAdapter {
 
-    private final WebClient webClient;
+    private final RestClient restClient;
 
     @Value("${keycloak.admin.url}")
     private String keycloakUrl;
@@ -33,26 +33,35 @@ public class KeycloakAdapter {
     @Value("${keycloak.admin.client-secret}")
     private String clientSecret;
 
-    public Mono<String> createUser(User user) {
-        return obtainAdminToken()
-                .flatMap(token -> registerUserInKeycloak(user, token))
-                .doOnSuccess(v -> log.info("User created in Keycloak: {}", user.getEmail()))
-                .doOnError(e -> log.error("Error creating user in Keycloak", e));
+    public String createUser(User user) {
+        try {
+            String token = obtainAdminToken();
+            String userId = registerUserInKeycloak(user, token);
+            log.info("User created in Keycloak: {}", user.getEmail());
+            return userId;
+        } catch (Exception e) {
+            log.error("Error creating user in Keycloak", e);
+            throw e;
+        }
     }
 
-    private Mono<String> obtainAdminToken() {
-        return webClient.post()
+    private String obtainAdminToken() {
+        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+        formData.add("grant_type", "client_credentials");
+        formData.add("client_id", clientId);
+        formData.add("client_secret", clientSecret);
+
+        Map response = restClient.post()
                 .uri(keycloakUrl + "/realms/master/protocol/openid-connect/token")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .body(BodyInserters.fromFormData("grant_type", "client_credentials")
-                        .with("client_id", clientId)
-                        .with("client_secret", clientSecret))
+                .body(formData)
                 .retrieve()
-                .bodyToMono(Map.class)
-                .map(response -> (String) response.get("access_token"));
+                .body(Map.class);
+
+        return (String) response.get("access_token");
     }
 
-    private Mono<String> registerUserInKeycloak(User user, String token) {
+    private String registerUserInKeycloak(User user, String token) {
         Map<String, Object> credential = Map.of(
                 "type", "password",
                 "value", user.getPassword().value(),
@@ -63,22 +72,20 @@ public class KeycloakAdapter {
                 "username", user.getName(),
                 "email", user.getEmail().value(),
                 "enabled", true,
-                "emailVerified", true,  // Dejarlo solo en desarrollo, despues añadir correo
+                "emailVerified", true,
                 "credentials", List.of(credential)
         );
 
-        return webClient.post()
+        var response = restClient.post()
                 .uri(keycloakUrl + "/admin/realms/" + realm + "/users")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(userRepresentation)
+                .body(userRepresentation)
                 .retrieve()
-                .toBodilessEntity()
-                .map(response -> {
-                    // Keycloak devuelve la URL del usuario creado en el header Location
-                    String location = response.getHeaders().getFirst("Location");
-                    return location.substring(location.lastIndexOf("/") + 1);
-                });
+                .toBodilessEntity();
+
+        String location = response.getHeaders().getFirst("Location");
+        return location.substring(location.lastIndexOf("/") + 1);
     }
 
 }

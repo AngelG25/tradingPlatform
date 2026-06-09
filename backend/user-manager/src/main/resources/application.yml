@@ -3,8 +3,11 @@ spring:
     name: user-manager
   config:
     import: optional:file:./config/user-manager.yml
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5432/user-manager
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user-manager
     username: user-manager
     password: user-manager
   flyway:

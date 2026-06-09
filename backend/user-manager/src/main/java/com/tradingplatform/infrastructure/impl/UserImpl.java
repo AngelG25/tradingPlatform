@@ -4,54 +4,54 @@ import com.tradingplatform.domain.model.Email;
 import com.tradingplatform.domain.model.User;
 import com.tradingplatform.domain.model.UserID;
 import com.tradingplatform.domain.model.Password;
-import com.tradingplatform.infrastructure.persistence.r2dbc.UserEntity;
-import com.tradingplatform.infrastructure.persistence.r2dbc.UserR2dbcRepository;
+import com.tradingplatform.infrastructure.persistence.UserEntity;
+import com.tradingplatform.infrastructure.persistence.UserJpaRepository;
 import com.tradingplatform.domain.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
 public class UserImpl implements UserRepository {
 
-    private final UserR2dbcRepository r2dbcRepository;
+    private final UserJpaRepository jpaRepository;
     private final KeycloakAdapter keycloakAdapter;
 
     @Override
-    public Mono<String> createUser(User user) {
+    public String createUser(User user) {
         return keycloakAdapter.createUser(user);
     }
 
     @Override
-    public Mono<User> save(User user) {
-        return r2dbcRepository.save(toEntity(user))
+    public User save(User user) {
+        return toDomain(jpaRepository.save(toEntity(user)));
+    }
+
+    @Override
+    public Optional<User> findById(UserID id) {
+        return jpaRepository.findById(id.value())
                 .map(this::toDomain);
     }
 
     @Override
-    public Mono<User> findById(UserID id) {
-        return r2dbcRepository.findById(id.value())
-                .map(this::toDomain);
-    }
-
-    @Override
-    public Mono<List<User>> findAll() {
-        return r2dbcRepository.findAll()
+    public List<User> findAll() {
+        return jpaRepository.findAll()
+                .stream()
                 .map(this::toDomain)
-                .collectList();
+                .toList();
     }
 
     @Override
-    public Mono<Boolean> existsById(UserID id) {
-        return r2dbcRepository.existsById(id.value());
+    public boolean existsById(UserID id) {
+        return jpaRepository.existsById(id.value());
     }
 
     @Override
-    public Mono<Void> deleteById(UserID id) {
-        return r2dbcRepository.deleteById(id.value());
+    public void deleteById(UserID id) {
+        jpaRepository.deleteById(id.value());
     }
 
     private UserEntity toEntity(User user) {

@@ -1,13 +1,13 @@
 package com.tradingplatform.application.usecase;
 
-import com.tradingplatform.domain.model.User;
+import com.tradingplatform.application.dto.RegisterRequest;
 import com.tradingplatform.domain.model.Email;
 import com.tradingplatform.domain.model.Password;
-import com.tradingplatform.application.dto.RegisterRequest;
+import com.tradingplatform.domain.model.User;
 import com.tradingplatform.domain.model.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -19,8 +19,12 @@ public class RegisterUserUseCase {
         this.userRepository = userRepository;
     }
 
-    public Mono<String> execute(RegisterRequest request) {
-        return Mono.fromCallable(() -> buildUser(request)).flatMap(userRepository::createUser).doOnSuccess(v -> log.info("User registered successfully: {}", request.getEmail()));
+    @Transactional
+    public String execute(RegisterRequest request) {
+        User user = buildUser(request);
+        String userId = userRepository.createUser(user);
+        log.info("User registered successfully: {}", request.getEmail());
+        return userId;
     }
 
     private User buildUser(RegisterRequest request) {
