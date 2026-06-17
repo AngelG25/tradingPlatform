@@ -88,4 +88,19 @@ public class KeycloakAdapter {
         return location.substring(location.lastIndexOf("/") + 1);
     }
 
+    public void deleteUser(String keycloakId) {
+        try {
+            String token = obtainAdminToken();
+            restClient.delete()
+                    .uri(keycloakUrl + "/admin/realms/" + realm + "/users/" + keycloakId)
+                    .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                    .retrieve()
+                    .toBodilessEntity();
+            log.info("User deleted from Keycloak: {}", keycloakId);
+        } catch (Exception e) {
+            log.error("Error deleting user from Keycloak", e);
+            throw e;
+        }
+    }
+
 }

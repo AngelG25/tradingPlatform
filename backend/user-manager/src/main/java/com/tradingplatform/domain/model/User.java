@@ -13,6 +13,7 @@ import java.util.UUID;
 public class User {
 
     private final UserID id;
+    private final UUID keycloakId;
     private final String name;
     private final Password password;
     private final Email email;
@@ -21,12 +22,14 @@ public class User {
 
     // Package-private constructor for persistence / ORM
     public User(final UserID id,
+                final UUID keycloakId,
                 final String name,
                 final Password password,
                 final Email email,
                 final Phone phone,
                 final List<TradingTimeZone> tradingTimeZones) {
         this.id = id;
+        this.keycloakId = keycloakId;
         this.name = name;
         this.password = password;
         this.email = email;
@@ -41,10 +44,11 @@ public class User {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Name cannot be null or blank");
         }
-        return new User(UserID.of(UUID.randomUUID()), name, password, email, null, List.of());
+        return new User(UserID.of(UUID.randomUUID()), null, name, password, email, null, List.of());
     }
 
     public static User reconstitute(final UserID id,
+                                    final UUID keycloakId,
                                     final String name,
                                     final Password password,
                                     final Email email,
@@ -53,6 +57,6 @@ public class User {
         if (id == null) {
             throw new IllegalArgumentException("ID cannot be null");
         }
-        return new User(id, name, password, email, phone, tradingTimeZones);
+        return new User(id, keycloakId, name, password, email, phone, tradingTimeZones);
     }
 }
