@@ -12,7 +12,7 @@ spring:
     password: user-manager
   flyway:
     enabled: true
-    locations: classpath:db/migration
+    locations: filesystem:migrations
 
 server:
   port: 8083
@@ -22,7 +22,10 @@ keycloak:
     url: http://localhost:8080
     realm: trading-app    # realm where users are created
     client-id: user-manager-admin
-    client-secret: YGUQanrPaqd05GrxYv4IAgKYkuO9K27Q  # from master realm client credentials tab
+    client-secret: {master_credentials: test}  # from master realm client credentials tab
+  user-client:
+    client-id: trading-gateway
+    client-secret: {trading_credentials: test} # from trading-app realm client credentials
 
 logging:
   level:

@@ -1,45 +1,62 @@
 package com.tradingplatform.infrastructure.impl;
 
-import com.tradingplatform.domain.model.TradingTimeZone;
 import com.tradingplatform.domain.model.User;
 import com.tradingplatform.domain.model.UserID;
 import com.tradingplatform.domain.model.repository.UserRepository;
 import com.tradingplatform.infrastructure.persistence.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class UserImpl implements UserRepository {
 
     private final UserJpaRepository jpaRepository;
-    private final TradingTimeZoneJpaRepository timeZoneRepository;
     private final KeycloakAdapter keycloakAdapter;
     private final UserMapper userMapper;
 
     @Override
+    public Map<String, Object> login(String username, String password) {
+        return keycloakAdapter.loginUser(username, password);
+    }
+
+    @Override
     public String createUser(User user) {
         String keycloakId = keycloakAdapter.createUser(user);
-        User userWithKeycloakId = User.reconstitute(
-                user.getId(),
-                UUID.fromString(keycloakId),
-                user.getName(),
-                user.getPassword(),
-                user.getEmail(),
-                user.getPhone(),
-                user.getTradingTimeZones()
-        );
-        jpaRepository.save(userMapper.toEntity(userWithKeycloakId, mapToEntities(user.getTradingTimeZones())));
-        return keycloakId;
+        try {
+            User userWithKeycloakId = User.reconstitute(
+                    user.getId(),
+                    UUID.fromString(keycloakId),
+                    user.getName(),
+                    user.getPassword(),
+                    user.getEmail(),
+                    user.getUsername(),
+                    user.getPhone(),
+                    user.getTradingTimeZone()
+            );
+            jpaRepository.save(userMapper.toEntity(userWithKeycloakId));
+            return user.getId().value().toString();
+        } catch (Exception e) {
+            log.error("Failed to save user in local database after Keycloak creation. Rolling back Keycloak creation for Keycloak ID: {}", keycloakId, e);
+            try {
+                keycloakAdapter.deleteUser(keycloakId);
+            } catch (Exception ex) {
+                log.error("Failed to delete user from Keycloak during rollback for Keycloak ID: {}", keycloakId, ex);
+            }
+            throw e;
+        }
     }
 
     @Override
     public User save(User user) {
-        UserEntity entity = userMapper.toEntity(user, mapToEntities(user.getTradingTimeZones()));
+        UserEntity entity = userMapper.toEntity(user);
         return userMapper.toDomain(jpaRepository.save(entity));
     }
 
@@ -71,12 +88,5 @@ public class UserImpl implements UserRepository {
             }
             jpaRepository.deleteById(userEntity.getId());
         });
-    }
-
-    private List<TradingTimeZoneEntity> mapToEntities(List<TradingTimeZone> timeZones) {
-        return timeZones.stream()
-                .map(tz -> timeZoneRepository.findByName(tz.name())
-                        .orElseThrow(() -> new RuntimeException("Timezone not found: " + tz.name())))
-                .collect(java.util.stream.Collectors.toList());
     }
 }

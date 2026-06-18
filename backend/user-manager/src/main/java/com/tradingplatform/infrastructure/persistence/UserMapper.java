@@ -4,13 +4,10 @@ import com.tradingplatform.application.dto.UserResponse;
 import com.tradingplatform.domain.model.*;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Component
 public class UserMapper {
 
-    public UserEntity toEntity(User domain, List<TradingTimeZoneEntity> timeZoneEntities) {
+    public UserEntity toEntity(User domain) {
         if (domain == null) {
             return null;
         }
@@ -21,7 +18,7 @@ public class UserMapper {
         entity.setUsername(domain.getName());
         entity.setEmail(domain.getEmail().value());
         entity.setPhone(domain.getPhone() != null ? domain.getPhone().value() : null);
-        entity.setTradingTimeZones(timeZoneEntities);
+        entity.setTradingTimeZone(domain.getTradingTimeZone());
 
         return entity;
     }
@@ -31,18 +28,15 @@ public class UserMapper {
             return null;
         }
 
-        List<TradingTimeZone> domainTimeZones = entity.getTradingTimeZones().stream()
-                .map(tz -> TradingTimeZone.valueOf(tz.getName()))
-                .collect(Collectors.toList());
-
         return User.reconstitute(
                 UserID.of(entity.getId()),
                 entity.getKeycloakId(),
                 entity.getUsername(),
                 null, // Password is not stored in our DB
                 Email.of(entity.getEmail()),
+                Username.of(entity.getUsername()),
                 entity.getPhone() != null ? Phone.of(entity.getPhone()) : null,
-                domainTimeZones
+                entity.getTradingTimeZone()
         );
     }
 
@@ -57,7 +51,7 @@ public class UserMapper {
                 .username(domain.getName())
                 .email(domain.getEmail().value())
                 .phone(domain.getPhone() != null ? domain.getPhone().value() : null)
-                .tradingTimeZones(domain.getTradingTimeZones())
+                .tradingTimeZone(domain.getTradingTimeZone())
                 .build();
     }
 }

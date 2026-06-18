@@ -4,7 +4,6 @@ import com.tradingplatform.domain.model.TradingTimeZone;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -15,5 +14,5 @@ public class UserResponse {
     private String username;
     private String email;
     private String phone;
-    private List<TradingTimeZone> tradingTimeZones;
+    private TradingTimeZone tradingTimeZone;
 }

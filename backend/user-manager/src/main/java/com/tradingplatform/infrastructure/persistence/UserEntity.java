@@ -1,11 +1,11 @@
 package com.tradingplatform.infrastructure.persistence;
 
+import com.tradingplatform.domain.model.TradingTimeZone;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,11 +26,7 @@ public class UserEntity {
 
     private String phone;
 
-    @ManyToMany
-    @JoinTable(
-        name = "user_time_zones_map",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "time_zone_id")
-    )
-    private List<TradingTimeZoneEntity> tradingTimeZones;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "timezone")
+    private TradingTimeZone tradingTimeZone;
 }

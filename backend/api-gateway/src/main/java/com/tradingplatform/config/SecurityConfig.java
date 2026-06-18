@@ -17,7 +17,7 @@ public class SecurityConfig {
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/actuator/**").permitAll() // public health checks, no need for token
-                        .pathMatchers("/api/users/register").permitAll() // public user registration
+                        .pathMatchers("/api/users/register", "/api/users/login").permitAll() // public user registration & login
                         .anyExchange().authenticated()  // any other route will be authenticated
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2  // mark this service as token validator

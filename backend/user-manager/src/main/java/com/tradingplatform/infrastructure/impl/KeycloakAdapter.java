@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -32,6 +33,36 @@ public class KeycloakAdapter {
 
     @Value("${keycloak.admin.client-secret}")
     private String clientSecret;
+
+    @Value("${keycloak.user-client.client-id}")
+    private String userClientId;
+
+    @Value("${keycloak.user-client.client-secret}")
+    private String userClientSecret;
+
+    public Map<String, Object> loginUser(String username, String password) {
+        try {
+            MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+            formData.add("grant_type", "password");
+            formData.add("client_id", userClientId);
+            formData.add("client_secret", userClientSecret);
+            formData.add("username", username);
+            formData.add("password", password);
+
+            return restClient.post()
+                    .uri(keycloakUrl + "/realms/" + realm + "/protocol/openid-connect/token")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                    .body(formData)
+                    .retrieve()
+                    .body(Map.class);
+        } catch (HttpClientErrorException.Unauthorized ex) {
+            log.error("Authentication unauthorized for user: {}", username, ex);
+            throw new IllegalArgumentException("Invalid username or password");
+        } catch (Exception e) {
+            log.error("Authentication failed for user: {}", username, e);
+            throw new RuntimeException("Authentication server error: " + e.getMessage());
+        }
+    }
 
     public String createUser(User user) {
         try {
