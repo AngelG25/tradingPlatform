@@ -23,9 +23,6 @@ keycloak:
     realm: trading-app    # realm where users are created
     client-id: user-manager-admin
     client-secret: {master_credentials: test}  # from master realm client credentials tab
-  user-client:
-    client-id: trading-gateway
-    client-secret: {trading_credentials: test} # from trading-app realm client credentials
 
 logging:
   level:

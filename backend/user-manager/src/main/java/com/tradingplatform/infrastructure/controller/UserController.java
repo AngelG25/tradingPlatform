@@ -3,7 +3,6 @@ package com.tradingplatform.infrastructure.controller;
 import com.tradingplatform.application.dto.RegisterRequest;
 import com.tradingplatform.application.dto.UpdateUserRequest;
 import com.tradingplatform.application.dto.UserResponse;
-import com.tradingplatform.application.dto.LoginRequest;
 import com.tradingplatform.application.usecase.*;
 import com.tradingplatform.infrastructure.persistence.UserMapper;
 import jakarta.validation.Valid;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -22,7 +20,6 @@ import java.util.UUID;
 public class UserController {
 
     private final RegisterUserUseCase registerUserUseCase;
-    private final LoginUserUseCase loginUserUseCase;
     private final GetUserUseCase getUserUseCase;
     private final ListUsersUseCase listUsersUseCase;
     private final DeleteUserUseCase deleteUserUseCase;
@@ -33,11 +30,6 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public String register(@Valid @RequestBody RegisterRequest request) {
         return registerUserUseCase.execute(request);
-    }
-
-    @GetMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@Valid @RequestBody LoginRequest request) {
-        return ResponseEntity.ok(loginUserUseCase.execute(request));
     }
 
     @GetMapping("/{id}")

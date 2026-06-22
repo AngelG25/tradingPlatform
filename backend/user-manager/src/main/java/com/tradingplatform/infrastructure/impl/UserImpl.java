@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,11 +20,6 @@ public class UserImpl implements UserRepository {
     private final UserJpaRepository jpaRepository;
     private final KeycloakAdapter keycloakAdapter;
     private final UserMapper userMapper;
-
-    @Override
-    public Map<String, Object> login(String username, String password) {
-        return keycloakAdapter.loginUser(username, password);
-    }
 
     @Override
     public String createUser(User user) {
