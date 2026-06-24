@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn compile:*)",
+      "Bash(curl -s \"https://repo1.maven.org/maven2/io/r2dbc/r2dbc-postgresql/maven-metadata.xml\")",
+      "WebSearch",
+      "Bash(rm \"D:/dev/Java/tradingApp/tradingPlatform/backend/user-manager/src/main/java/com/tradingplatform/application/dto/LoginRequest.java\")",
+      "Bash(rm \"D:/dev/Java/tradingApp/tradingPlatform/backend/user-manager/src/main/java/com/tradingplatform/application/usecase/LoginUserUseCase.java\")",
+      "Bash(mvn -q clean install -DskipTests)",
+      "Bash(mvn clean:*)",
+      "Bash(mvn test:*)",
+      "Bash(mvn -pl user-manager -am clean install -q)",
+      "Bash(echo \"EXIT=$?\")"
+    ]
+  }
+}
