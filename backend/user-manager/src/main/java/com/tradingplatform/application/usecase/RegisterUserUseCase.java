@@ -28,6 +28,10 @@ public class RegisterUserUseCase {
     }
 
     private User buildUser(RegisterRequest request) {
-        return User.create(request.getUsername(), Password.of(request.getPassword()), Email.of(request.getEmail()));
+        return User.create(
+                request.getUsername(),
+                Password.of(request.getPassword()),
+                Email.of(request.getEmail())
+        );
     }
 }

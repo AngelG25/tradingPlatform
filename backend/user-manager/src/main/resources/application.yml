@@ -8,11 +8,11 @@ spring:
       enabled: true
   datasource:
     url: jdbc:postgresql://localhost:5432/user-manager
-    username: user-manager
-    password: user-manager
+    username: ${SPRING_DATASOURCE_USERNAME:user-manager}
+    password: ${SPRING_DATASOURCE_PASSWORD:user-manager}
   flyway:
     enabled: true
-    locations: classpath:db/migration
+    locations: filesystem:migrations
 
 server:
   port: 8083
@@ -20,9 +20,9 @@ server:
 keycloak:
   admin:
     url: http://localhost:8080
-    realm: trading-app    # realm where users are created
+    realm: trading-app
     client-id: user-manager-admin
-    client-secret: YGUQanrPaqd05GrxYv4IAgKYkuO9K27Q  # from master realm client credentials tab
+    client-secret: ${KEYCLOAK_ADMIN_CLIENT_SECRET:test}
 
 logging:
   level:
