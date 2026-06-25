@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useAuth } from '@/composables/useAuth'
 
 const routes = [
   {
@@ -20,10 +20,12 @@ export const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const auth = useAuthStore()
-  // Unauthenticated users go straight to Keycloak — no in-app login screen.
-  if (!auth.isAuthenticated) {
-    auth.login() // window.location.href → Keycloak
-    return false  // cancel navigation; browser is leaving
-  }
+  // /callback is the destination of the auth flow — don't guard it.
+  if (to.name === 'callback') return true
+
+  const auth = useAuth()
+  if (auth.isAuthenticated.value) return true
+
+  auth.login() // window.location.assign → browser leaves
+  return false  // cancel vue-router navigation; browser is leaving
 })

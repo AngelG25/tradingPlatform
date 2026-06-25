@@ -1,15 +1,16 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useAuth } from '@/composables/useAuth'
 
 const route = useRoute()
 const router = useRouter()
-const auth = useAuthStore()
+const auth = useAuth()
 const error = ref(null)
 
 onMounted(async () => {
   const params = route.query
+
   if (params.error) {
     error.value = params.error_description || params.error
     return
@@ -18,6 +19,7 @@ onMounted(async () => {
     error.value = 'missing code or state in callback'
     return
   }
+
   try {
     await auth.handleCallback(params.code, params.state)
     router.replace({ name: 'home' })

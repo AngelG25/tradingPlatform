@@ -1,0 +1,2 @@
+securizar endpoints a partir del token, no se puede llamar a buscar todos los usuarios, ni buscar
+por id ni modificar un usuario que no sea el suyo propio ni borrar a no ser que seas admin

@@ -1,9 +1,11 @@
 <script setup>
 import { computed } from 'vue'
-import { useAuthStore } from '@/stores/auth'
+import { useAuth } from '@/composables/useAuth'
 
-const auth = useAuthStore()
-const username = computed(() => auth.user?.preferred_username ?? auth.user?.sub ?? 'unknown')
+const auth = useAuth()
+const username = computed(
+  () => auth.user.value?.preferred_username ?? auth.user.value?.sub ?? 'unknown',
+)
 
 async function doLogout() {
   await auth.logout()
