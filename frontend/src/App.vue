@@ -1,10 +1,18 @@
 <script setup>
+import { computed } from 'vue'
 import { RouterView } from 'vue-router'
+import DashboardView from '@/views/DashboardView.vue'
+import { useAuth } from '@/composables/useAuth'
+
+const auth = useAuth()
+
+const showLanding = computed(() => !auth.isAuthenticated.value)
 </script>
 
 <template>
   <div class="app">
-    <RouterView />
+    <DashboardView v-if="!showLanding" />
+    <RouterView v-else />
   </div>
 </template>
 
@@ -22,7 +30,9 @@ import { RouterView } from 'vue-router'
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 }
 
-html, body, #app {
+html,
+body,
+#app {
   margin: 0;
   padding: 0;
   height: 100%;
