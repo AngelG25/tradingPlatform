@@ -13,17 +13,33 @@ spring:
 
   cloud:
     gateway:
-      routes:
-        - id: market-data-route
-          uri: http://localhost:8081
-          predicates:
-            - Path=/api/market/**
-          filters:
-            - StripPrefix=1
+      server:
+        webflux:
+          routes:
+            - id: market-data-route
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/market/**
+              filters:
+                - StripPrefix=1
 
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: "http://localhost:5173,http://localhost:3000"
-            allowedMethods: "*"
-            allowedHeaders: "*"
+            - id: user-manager-route
+              uri: http://localhost:8083
+              predicates:
+                - Path=/api/users/**
+
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins:
+                  - "http://localhost:5173"
+                  - "http://localhost:3000"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - PATCH
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders: "*"
+                allowCredentials: true

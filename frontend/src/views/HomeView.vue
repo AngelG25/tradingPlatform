@@ -1,29 +1,24 @@
 <script setup>
-import { computed } from 'vue'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useAuth } from '@/composables/useAuth'
+import RegisterModal from '@/components/RegisterModal.vue'
 
-const auth = useAuth()
+const showRegister = ref(false)
+const router = useRouter()
+const { login } = useAuth()
 
-const username = computed(
-  () => auth.user.value?.preferred_username
-    ?? auth.user.value?.name
-    ?? auth.user.value?.email
-    ?? auth.user.value?.sub
-    ?? 'me',
-)
-
-async function doLogin() {
-  await auth.login()
-}
-
-async function doLogout() {
-  await auth.logout()
-}
-
-// Register is a placeholder for now — backend registration is via
-// POST /api/users/register, but the user-manager flow is not wired up yet.
 function doRegister() {
-  // intentionally no-op until registration is implemented
+  showRegister.value = true
+}
+
+function doLogin() {
+  login()
+}
+
+async function onRegisterSuccess() {
+  showRegister.value = false
+  await router.push('/dashboard')
 }
 </script>
 
@@ -32,17 +27,7 @@ function doRegister() {
     <header class="bar">
       <span class="brand">Trading Platform</span>
 
-      <nav v-if="auth.isAuthenticated.value" class="me" @click="doLogout" role="button" tabindex="0">
-        <span class="avatar" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="8" r="4" />
-            <path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" />
-          </svg>
-        </span>
-        <span class="me-name">{{ username }}</span>
-      </nav>
-
-      <nav v-else class="actions">
+      <nav class="actions">
         <button type="button" class="btn btn-secondary" @click="doRegister">
           Register
         </button>
@@ -61,6 +46,8 @@ function doRegister() {
       </p>
     </section>
   </main>
+
+  <RegisterModal :open="showRegister" @close="showRegister = false" @success="onRegisterSuccess" />
 </template>
 
 <style scoped>
@@ -115,49 +102,6 @@ function doRegister() {
 
 .btn-primary:hover {
   filter: brightness(1.1);
-}
-
-.me {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.8rem 0.35rem 0.45rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--text);
-  cursor: pointer;
-  font-size: 0.9rem;
-  letter-spacing: 0.02em;
-  transition: border-color 120ms, color 120ms;
-}
-
-.me:hover {
-  border-color: var(--danger);
-  color: var(--danger);
-}
-
-.avatar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.6rem;
-  height: 1.6rem;
-  border-radius: 50%;
-  background: var(--border);
-  color: var(--text);
-}
-
-.me:hover .avatar {
-  color: var(--danger);
-}
-
-.me-name {
-  font-weight: 500;
-  max-width: 12rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .hero {
