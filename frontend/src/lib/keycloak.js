@@ -26,7 +26,7 @@ const revokeEndpoint = () =>
 
 // ---- Authorization redirect ----
 
-export async function buildAuthorizationUrl() {
+export async function buildAuthorizationUrl({ loginHint } = {}) {
   const verifier = generateCodeVerifier()
   const challenge = await generateCodeChallenge(verifier)
   const state = generateRandomString()
@@ -47,6 +47,9 @@ export async function buildAuthorizationUrl() {
     state,
     nonce,
   })
+  if (loginHint) {
+    params.set('login_hint', loginHint)
+  }
   return `${authEndpoint()}?${params.toString()}`
 }
 

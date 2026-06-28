@@ -1,11 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { useAuth } from '@/composables/useAuth'
 import RegisterModal from '@/components/RegisterModal.vue'
 
 const showRegister = ref(false)
-const router = useRouter()
 const { login } = useAuth()
 
 function doRegister() {
@@ -16,9 +14,13 @@ function doLogin() {
   login()
 }
 
-async function onRegisterSuccess() {
+// Registration only creates the account in the backend; it does NOT
+// authenticate the user. Kick off the PKCE flow with the just-registered
+// username as login_hint so Keycloak pre-fills the login form. The user
+// only has to type their password.
+function onRegisterSuccess(username) {
   showRegister.value = false
-  await router.push('/dashboard')
+  login({ loginHint: username })
 }
 </script>
 

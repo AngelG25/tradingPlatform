@@ -28,7 +28,7 @@ watch(
 async function onSubmit() {
   try {
     await register({ ...form })
-    emit('success')
+    emit('success', form.username)
   } catch {
     /* error already surfaced via the composable's `error` ref */
   }

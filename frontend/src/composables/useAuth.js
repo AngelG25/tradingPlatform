@@ -24,8 +24,8 @@ export function useAuth() {
     () => !!accessToken.value && Date.now() < expiresAt.value,
   )
 
-  async function login() {
-    const url = await buildAuthorizationUrl()
+  async function login({ loginHint } = {}) {
+    const url = await buildAuthorizationUrl({ loginHint })
     window.location.assign(url)
   }
 
